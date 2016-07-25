@@ -22,6 +22,8 @@ RUN \
 RUN \
   a2enmod rewrite && \
   a2enmod proxy_fcgi && \
+  a2enmod remoteip && \
+  a2enmod expires && \
   a2enconf allow-override-all && \
   a2enconf php-fpm
 

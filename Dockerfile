@@ -1,7 +1,5 @@
 FROM phusion/baseimage:0.9.19
 
-MAINTAINER Mads H. Danquah <mads@reload.dk>
-
 # Basic install of apache
 RUN \
   apt-get update && \

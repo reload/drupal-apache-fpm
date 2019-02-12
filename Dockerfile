@@ -22,7 +22,10 @@ RUN \
   a2enmod proxy_fcgi && \
   a2enmod remoteip && \
   a2enmod expires && \
+  a2enmod ssl && \
+  a2ensite ssl && \
   a2enconf allow-override-all && \
   a2enconf php-fpm
 
 EXPOSE 80
+EXPOSE 443

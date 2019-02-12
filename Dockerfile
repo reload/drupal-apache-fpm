@@ -1,13 +1,7 @@
 FROM phusion/baseimage:0.11
 
 # Basic install of apache
-RUN \
-  apt-get update && \
-  DEBIAN_FRONTEND=noninteractive \
-    apt-get -y install \
-      apache2 \
-  && \
-  apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN install_clean apache2 ssl-cert
 
 # Add custom apache configuration and prepare services.
 COPY files/etc/ /etc/
@@ -22,7 +16,10 @@ RUN \
   a2enmod proxy_fcgi && \
   a2enmod remoteip && \
   a2enmod expires && \
+  a2enmod ssl && \
+  a2ensite ssl && \
   a2enconf allow-override-all && \
   a2enconf php-fpm
 
 EXPOSE 80
+EXPOSE 443

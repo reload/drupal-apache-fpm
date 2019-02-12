@@ -1,13 +1,7 @@
 FROM phusion/baseimage:0.11
 
 # Basic install of apache
-RUN \
-  apt-get update && \
-  DEBIAN_FRONTEND=noninteractive \
-    apt-get -y install \
-      apache2 \
-  && \
-  apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN install_clean apache2 ssl-cert
 
 # Add custom apache configuration and prepare services.
 COPY files/etc/ /etc/

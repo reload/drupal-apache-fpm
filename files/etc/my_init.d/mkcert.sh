@@ -24,3 +24,14 @@ IFS=' ' read -r -a MKCERT_DOMAINS <<< "${MKCERT_DOMAINS}"
 
 # Run `mkcert` to generate certificate and key.
 /usr/local/bin/mkcert -cert-file /etc/ssl/certs/ssl-cert-snakeoil.pem -key-file /etc/ssl/private/ssl-cert-snakeoil.key "${MKCERT_DOMAINS[@]}"
+
+# Expose the generated certificate in /cert named after the first
+# domain name (compatible with Dory / nginx-proxy).
+mkdir -p /cert
+for domain in "${MKCERT_DOMAINS[@]}"
+do
+    # Strip wildcard.
+    domain="${domain#\*\.}"
+    cp /etc/ssl/certs/ssl-cert-snakeoil.pem "/cert/${domain}.crt"
+    cp /etc/ssl/private/ssl-cert-snakeoil.key "/cert/${domain}.key"
+done

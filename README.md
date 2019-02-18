@@ -21,7 +21,8 @@ used for HTTPS in either:
 
 ```yaml
     volumes:
-      - '${HOME}/Library/Application Support/mkcert:/mkcert:ro'
+      - '${HOME}/Library/Application Support/mkcert:/mkcert/mac:ro'
+      - '${HOME}/.local/share/mkcert:/mkcert/linux:ro'
 
     environment:
       MKCERT_DOMAINS: "example.docker *.example.docker local.docker"

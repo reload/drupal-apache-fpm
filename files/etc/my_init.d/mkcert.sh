@@ -2,9 +2,10 @@
 
 set -euo pipefail
 
-export CAROOT=/mkcert
+CAROOT="$(find /mkcert -type d -exec sh -c '[ -f "$0"/rootCA.pem ] && [ -f "$0"/rootCA-key.pem ]' '{}' \; -print)"
+export CAROOT
 
-if [[ ! -r "${CAROOT}/rootCA.pem" ]] && [[ ! -r "${CAROOT}/rootCA-key.pem" ]]; then
+if [[ -z "${CAROOT}" ]]; then
     exit 0;
 fi
 

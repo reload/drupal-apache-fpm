@@ -44,10 +44,11 @@ IFS=' ' read -r -a MKCERT_DOMAINS <<< "${MKCERT_DOMAINS}"
 
 # Expose the generated certificate in /cert named after the first
 # domain name (compatible with Dory / nginx-proxy).
+echo "Copying certficate(s) and key(s) into /cert:"
 for domain in "${MKCERT_DOMAINS[@]}"
 do
     # Strip wildcard.
     domain="${domain#\*\.}"
-    cp /etc/ssl/certs/ssl-cert-snakeoil.pem "/cert/${domain}.crt"
-    cp /etc/ssl/private/ssl-cert-snakeoil.key "/cert/${domain}.key"
+    cp -v /etc/ssl/certs/ssl-cert-snakeoil.pem "/cert/${domain}.crt"
+    cp -v /etc/ssl/private/ssl-cert-snakeoil.key "/cert/${domain}.key"
 done

@@ -44,17 +44,22 @@ Then follow the steps in the mkcert sections to specify which certificates to ge
 This image has [mkcert](https://github.com/FiloSottile/mkcert)
 builtin.
 
-Run `mkcert -install` on your host machine.
+Install `mkcert` on your host machine and generate and install a root
+certificate by running `mkcert -install` on your host machine.
 
 Then you add the generated CAROOT as a volume (the path on the host
 machine is the output of `mkcert -CAROOT`).
 
 In your `docker-compose.yml` supply one or more host names to be be
-used for HTTPS in either:
+used for HTTPS. Host names will be search for in these location and in
+this order:
 
-1. environment variable `MKCERT_DOMAINS`,
-1. the environment variable `VIRTUAL_HOST`, or
-1. as `hostname` and `domainname` configuration
+1. environment variable `MKCERT_DOMAINS` (several hostnames separated
+   by space is possible, you can even supply a wildcard domain),
+1. the environment variable `VIRTUAL_HOST` (as used by [Dinghy HTTP
+   Proxy](https://github.com/codekitchen/dinghy-http-proxy)), or
+1. the output of `hostname -f` in the container (which can be set with
+   the `hostname` and `domainname` options).
 
 ```yaml
     volumes:

@@ -28,7 +28,6 @@ IFS=' ' read -r -a MKCERT_DOMAINS <<< "${MKCERT_DOMAINS}"
 
 # Expose the generated certificate in /cert named after the first
 # domain name (compatible with Dory / nginx-proxy).
-mkdir -p /cert
 for domain in "${MKCERT_DOMAINS[@]}"
 do
     # Strip wildcard.

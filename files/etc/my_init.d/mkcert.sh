@@ -9,8 +9,19 @@ if [[ -z "${CAROOT}" ]]; then
     exit 0;
 fi
 
-MKCERT_DOMAINS="${MKCERT_DOMAINS:-${VIRTUAL_HOST:-$(hostname -f)}}"
+# If no VIRTUAL_HOST is set use `hostname -f` as fallback.
+VIRTUAL_HOST="${VIRTUAL_HOST:-$(hostname -f)}"
 
+# Dinghys wildcard syntax is prefixing only with a dot (as in
+# `.example.com`). We rewrite those to use an asterisk as expected by
+# mkcert (`*.example.com`).
+VIRTUAL_HOST="${VIRTUAL_HOST/#./*.}"
+
+# If on MKCERT_DOMAINS is set use VIRTUAL_HOST as fallback.
+MKCERT_DOMAINS="${MKCERT_DOMAINS:-${VIRTUAL_HOST}}"
+
+# If we couldn't find any domain names just exit now without
+# generating any certificates.
 if [[ -z "${MKCERT_DOMAINS}" ]]; then
     exit 0;
 fi

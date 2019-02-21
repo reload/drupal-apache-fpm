@@ -2,9 +2,13 @@
 
 set -euo pipefail
 
+# Try to locate `rootCA.pem` and `rootCA-key.pem` in a folder beneath
+# `/mkcert`.
 CAROOT="$(find /mkcert -type d -exec sh -c '[ -f "$0"/rootCA.pem ] && [ -f "$0"/rootCA-key.pem ]' '{}' \; -print)"
 export CAROOT
 
+# If no root CA found just exit now without generating any
+# certificates.
 if [[ -z "${CAROOT}" ]]; then
     exit 0;
 fi
@@ -26,6 +30,7 @@ if [[ -z "${MKCERT_DOMAINS}" ]]; then
     exit 0;
 fi
 
+# Split a space separated string into a bash array.
 IFS=' ' read -r -a MKCERT_DOMAINS <<< "${MKCERT_DOMAINS}"
 
 # Install the CA certificate in the Docker containers system trust

@@ -45,7 +45,12 @@ This image has [mkcert](https://github.com/FiloSottile/mkcert)
 builtin.
 
 Install `mkcert` on your host machine and generate and install a root
-certificate by running `mkcert -install` on your host machine.
+certificate by running `mkcert -install` on your host machine (one time only).
+
+Mac users should then do (one time only):
+```console
+$ mkdir -p ~/.local/share && ln -s "$(mkcert -CAROOT)"  ~/.local/share
+```
 
 Then you add the generated CAROOT as a volume (the path on the host
 machine is the output of `mkcert -CAROOT`).
@@ -77,8 +82,7 @@ this order:
 
 ```yaml
     volumes:
-      - '${HOME}/Library/Application Support/mkcert:/mkcert/mac:ro'
-      - '${HOME}/.local/share/mkcert:/mkcert/linux:ro'
+      - '${HOME}/.local/share/mkcert:/mkcert:ro'
       - '${HOME}/.local/share/dev_certificates:/cert:rw'
 
     environment:

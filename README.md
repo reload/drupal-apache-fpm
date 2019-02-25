@@ -68,8 +68,7 @@ this order:
 
 ```yaml
     volumes:
-      - '${HOME}/Library/Application Support/mkcert:/mkcert/mac:ro'
-      - '${HOME}/.local/share/mkcert:/mkcert/linux:ro'
+      - '${HOME}/.local/share/mkcert:/mkcert:ro'
 
     environment:
       MKCERT_DOMAINS: "example.docker *.example.docker local.docker"

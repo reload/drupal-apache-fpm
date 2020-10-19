@@ -24,7 +24,7 @@ RUN \
 RUN \
   mkdir /cert && \
   mkdir /mkcert && \
-  curl -sSL https://github.com/FiloSottile/mkcert/releases/download/v1.3.0/mkcert-v1.3.0-linux-amd64 -o /usr/local/bin/mkcert && \
+  curl -sSL https://github.com/FiloSottile/mkcert/releases/download/v1.4.1/mkcert-v1.4.1-linux-amd64 -o /usr/local/bin/mkcert && \
   chmod +x /usr/local/bin/mkcert
 
 EXPOSE 80

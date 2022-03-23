@@ -24,11 +24,9 @@ VIRTUAL_HOST="${VIRTUAL_HOST/#./*.}"
 # If on MKCERT_DOMAINS is set use VIRTUAL_HOST as fallback.
 MKCERT_DOMAINS="${MKCERT_DOMAINS:-${VIRTUAL_HOST}}"
 
-# If we couldn't find any domain names just exit now without
-# generating any certificates.
-if [[ -z "${MKCERT_DOMAINS}" ]]; then
-    exit 0;
-fi
+# Always add the container IP(s) so HTTPS will work on the bare IP
+# too.
+MKCERT_DOMAINS="${MKCERT_DOMAINS} $(hostname -I)"
 
 # Split a space separated string into a bash array.
 IFS=' ' read -r -a MKCERT_DOMAINS <<< "${MKCERT_DOMAINS}"

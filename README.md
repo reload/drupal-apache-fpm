@@ -66,6 +66,9 @@ this order:
 1. the output of `hostname -f` in the container (which can be set with
    the `hostname` and `domainname` options).
 
+Mkcert will always add the IPs of the container to the certificate, so
+`curl`'ing HTTPS on the IP should always work.
+
 ```yaml
     volumes:
       - '${HOME}/.local/share/mkcert:/mkcert:ro'

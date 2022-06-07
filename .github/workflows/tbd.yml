@@ -1,6 +1,6 @@
 on: push
 
-name: Workflow name test ${{ github.sha }}
+name: Workflow name test - nope
 jobs:
 
   build:

@@ -1,0 +1,11 @@
+on: push
+
+name: Workflow name test ${{ github.sha }}
+jobs:
+
+  build:
+    name: Build name test ${{ github.sha }}
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      name: step name test ${{ github.sha }}

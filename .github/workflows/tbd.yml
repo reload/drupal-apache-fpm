@@ -1,11 +1,16 @@
 on: push
 
-name: Workflow name test - nope
+# Nothing dynamic seems to be allowed here
+name: Workflow name test
+env:
+  ON_DEFAULT: ${{ (github.ref == format('refs/heads/{0}', github.event.repository.default_branch) && 'on default') || 'not on default' }}
 jobs:
   build:
-    name: Build name test ${{ (github.ref == format('refs/heads/{0}', github.event.repository.default_branch) && 'on default') || 'not on default' }}
+    # But this works
+    name: Build name test ${{ (github.ref == format('refs/heads/{0}', github.event.repository.default_branch) && 'on default') || 'not on default' }} - $ON_DEFAULT
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-      name: step name test ${{ (github.ref == format('refs/heads/{0}', github.event.repository.default_branch) && 'on default') || 'not on default' }}
+      # and this
+      name: step name test ${{ (github.ref == format('refs/heads/{0}', github.event.repository.default_branch) && 'on default') || 'not on default' }} - $ON_DEFAULT
 

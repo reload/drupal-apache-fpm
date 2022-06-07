@@ -7,7 +7,7 @@ env:
 jobs:
   build:
     # But this works
-    name: Build name test ${{ env.ON_DEFAULT }}
+    name: Build name test $ON_DEFAULT
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3

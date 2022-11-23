@@ -1,4 +1,4 @@
-FROM phusion/baseimage:0.11
+FROM phusion/baseimage:18.04-1.0.0
 
 # Basic install of apache
 RUN install_clean apache2 ssl-cert

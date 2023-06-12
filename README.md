@@ -28,6 +28,7 @@ If you don't already have a Dory configuration-file, have it generate one by run
     https_enabled: true
     # Update the follow line to point at the dev_certificates
     ssl_certs_dir: <your homedir>/.local/share/dev_certificates
+    image: codekitchen/dinghy-http-proxy:latest
 ```
 
 Then mount that directory into the apache-fpm container so that its auto-generated certificates will be accessible to Dory.

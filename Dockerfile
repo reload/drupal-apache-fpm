@@ -14,6 +14,7 @@ RUN \
 RUN \
   a2enmod rewrite && \
   a2enmod proxy_fcgi && \
+  a2enmod proxy_html && \
   a2enmod remoteip && \
   a2enmod expires && \
   a2enmod ssl && \

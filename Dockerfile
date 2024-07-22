@@ -19,6 +19,7 @@ RUN \
   a2enmod remoteip && \
   a2enmod expires && \
   a2enmod ssl && \
+  a2enmod headers && \
   a2ensite ssl && \
   a2enconf allow-override-all && \
   a2enconf php-fpm
